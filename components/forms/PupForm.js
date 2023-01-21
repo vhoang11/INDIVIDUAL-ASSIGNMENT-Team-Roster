@@ -1,0 +1,123 @@
+import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
+import { Button } from 'react-bootstrap';
+import { useAuth } from '../../utils/context/authContext';
+import { createPup, updatePup } from '../../api/pupData';
+
+const initialState = {
+  name: '',
+  image: '',
+  description: '',
+  adoptable: false,
+};
+
+function PupForm({ obj }) {
+  const [pupInput, setPupInput] = useState(initialState);
+  const router = useRouter();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (obj.firebaseKey) setPupInput(obj);
+  }, [obj, user]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setPupInput((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (obj.firebaseKey) {
+      updatePup(pupInput)
+        .then(() => router.push(`/pups/${obj.firebaseKey}`));
+    } else {
+      const payload = { ...pupInput, uid: user.uid };
+      createPup(payload).then(() => {
+        router.push('/team');
+      });
+    }
+  };
+
+  return (
+    <Form onSubmit={handleSubmit}>
+      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Pup</h2>
+
+      {/* Name INPUT  */}
+      <FloatingLabel controlId="floatingInput1" label="Pup Name" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Enter a name"
+          name="name"
+          value={pupInput.name}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      {/* IMAGE INPUT  */}
+      <FloatingLabel controlId="floatingInput2" label="Pup Image" className="mb-3">
+        <Form.Control
+          type="url"
+          placeholder="Enter an image url"
+          name="image"
+          value={pupInput.image}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      {/* DESCRIPTION INPUT  */}
+      <FloatingLabel controlId="floatingInput3" label="Pup Description" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Enter description"
+          name="description"
+          value={pupInput.description}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
+
+      {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
+      <Form.Check
+        className="text-white mb-3"
+        type="switch"
+        id="adoptable"
+        name="adoptable"
+        label="Adoptable?"
+        checked={pupInput.adoptable}
+        onChange={(e) => {
+          setPupInput((prevState) => ({
+            ...prevState,
+            adoptable: e.target.checked,
+          }));
+        }}
+      />
+
+      {/* SUBMIT BUTTON  */}
+      <Button type="submit">{obj.firebaseKey ? 'Update' : 'Create'} Pup</Button>
+    </Form>
+  );
+}
+
+PupForm.propTypes = {
+  obj: PropTypes.shape({
+    name: PropTypes.string,
+    image: PropTypes.string,
+    description: PropTypes.string,
+    adoptable: PropTypes.bool,
+    firebaseKey: PropTypes.string,
+  }),
+};
+
+PupForm.defaultProps = {
+  obj: initialState,
+};
+
+export default PupForm;
