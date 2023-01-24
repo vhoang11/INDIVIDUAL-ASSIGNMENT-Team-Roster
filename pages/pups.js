@@ -19,7 +19,7 @@ function Team() {
 
   return (
     <div className="text-center my-4">
-      <Link href="/new" passHref>
+      <Link href="/pups/new" passHref>
         <Button>Add A Pup</Button>
       </Link>
       <div className="d-flex flex-wrap">

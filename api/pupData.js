@@ -38,12 +38,19 @@ const createPup = (pupObj) => new Promise((resolve, reject) => {
 });
 
 const updatePup = (pupObj) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/pups/${pupObj.firebaseKey}.json`, pupObj)
+  fetch(`${dbUrl}/pups/${pupObj.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(pupObj),
+  })
+    .then((response) => response.json())
     .then(resolve)
     .catch(reject);
 });
 
-const pupsOnSale = (uid) => new Promise((resolve, reject) => {
+const pupsUpForAdoption = (uid) => new Promise((resolve, reject) => {
   fetch(`${dbUrl}/pups.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
@@ -52,8 +59,8 @@ const pupsOnSale = (uid) => new Promise((resolve, reject) => {
   })
     .then((response) => response.json())
     .then((data) => {
-      const onSale = Object.values(data).filter((item) => item.sale);
-      resolve(onSale);
+      const upForAdoption = Object.values(data).filter((item) => item.sale);
+      resolve(upForAdoption);
     })
     .catch(reject);
 });
@@ -64,5 +71,5 @@ export {
   deletePup,
   getSinglePup,
   updatePup,
-  pupsOnSale,
+  pupsUpForAdoption,
 };

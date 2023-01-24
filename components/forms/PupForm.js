@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { createPup, updatePup } from '../../api/pupData';
+import { getTeams } from '../../api/teamData';
 
 const initialState = {
   name: '',
@@ -16,10 +17,13 @@ const initialState = {
 
 function PupForm({ obj }) {
   const [pupInput, setPupInput] = useState(initialState);
+  const [teams, setTeams] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
   useEffect(() => {
+    getTeams(user.uid).then(setTeams);
+
     if (obj.firebaseKey) setPupInput(obj);
   }, [obj, user]);
 
@@ -39,7 +43,7 @@ function PupForm({ obj }) {
     } else {
       const payload = { ...pupInput, uid: user.uid };
       createPup(payload).then(() => {
-        router.push('/team');
+        router.push('/pups');
       });
     }
   };
@@ -84,6 +88,30 @@ function PupForm({ obj }) {
         />
       </FloatingLabel>
 
+      {/* TEAM SELECT  */}
+      <FloatingLabel controlId="floatingSelect" label="Team">
+        <Form.Select
+          aria-label="Team"
+          name="team_id"
+          onChange={handleChange}
+          className="mb-3"
+          value={obj.team_id}
+          required
+        >
+          <option value="">Select a Team</option>
+          {
+            teams.map((team) => (
+              <option
+                key={team.firebaseKey}
+                value={team.firebaseKey}
+              >
+                {team.team_name}
+              </option>
+            ))
+          }
+        </Form.Select>
+      </FloatingLabel>
+
       {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
       <Form.Check
         className="text-white mb-3"
@@ -112,6 +140,7 @@ PupForm.propTypes = {
     image: PropTypes.string,
     description: PropTypes.string,
     adoptable: PropTypes.bool,
+    team_id: PropTypes.string,
     firebaseKey: PropTypes.string,
   }),
 };
