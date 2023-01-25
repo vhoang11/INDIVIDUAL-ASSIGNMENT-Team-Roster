@@ -1,0 +1,19 @@
+{
+  "-NMKfdEAlKjIhRxuSQt7": {
+    "team_name": "Team Fluff",
+    "image": "https://discovery.sndimg.com/content/dam/images/discovery/editorial/shows/p/puppybowl/2022/puppy-play/38080_020.jpg.rend.hgtvcom.966.644.suffix/1643397390278.jpeg",
+    "email": "teamfluff@gmail.com",
+    "favorite": true,
+    "firebaseKey": "-NMKfdEAlKjIhRxuSQt7",
+    "uid": "MJNpmWnUQ3VvDzbyJtWKNsqQCC73"
+  },
+
+  "-NMKfdEDYb4hgq0z5xeV": {
+    "team_name": "Team Ruff",
+    "image": "https://discovery.sndimg.com/content/dam/images/discovery/editorial/shows/p/puppybowl/2022/puppy-play/38080_030.jpg.rend.hgtvcom.966.644.suffix/1643397602276.jpeg",
+    "email": "teamruff@gmail.com",
+    "favorite": false,
+    "firebaseKey": "-NMKfdEDYb4hgq0z5xeV",
+    "uid": "MJNpmWnUQ3VvDzbyJtWKNsqQCC73"
+  }
+}
