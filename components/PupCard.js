@@ -21,15 +21,13 @@ function PupCard({ pupObj, onUpdate }) {
         <Card.Title>{pupObj.name}</Card.Title>
         <p className="card-text bold">{pupObj.team}</p>
         <p className="card-text bold">{pupObj.adoptable && <span>ADOPTABLE<br /></span> } {pupObj.adoptable}</p>
-        {/* DYNAMIC LINK TO VIEW THE BOOK DETAILS  */}
         <Link href={`/pups/${pupObj.firebaseKey}`} passHref>
-          <Button variant="primary" className="m-2">VIEW</Button>
+          <Button variant="primary" className="m-2" style={{ backgroundColor: '#023e8a' }}>VIEW</Button>
         </Link>
-        {/* DYNAMIC LINK TO EDIT THE BOOK DETAILS  */}
         <Link href={`/pups/edit/${pupObj.firebaseKey}`} passHref>
-          <Button variant="info">EDIT</Button>
+          <Button variant="info" style={{ backgroundColor: '#00b4d8' }}>EDIT</Button>
         </Link>
-        <Button variant="danger" onClick={deleteThisPup} className="m-2">
+        <Button variant="danger" onClick={deleteThisPup} className="m-2" style={{ backgroundColor: '#f77f00' }}>
           DELETE
         </Button>
       </Card.Body>

@@ -16,6 +16,7 @@ export default function ViewPup() {
     viewPupDetails(firebaseKey).then(setPupDetails);
   }, [firebaseKey]);
   //   getSinglePup(firebaseKey).then(setPupDetails);
+  // });
 
   return (
     <div className="mt-5 d-flex flex-wrap">

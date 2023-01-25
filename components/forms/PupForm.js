@@ -49,7 +49,7 @@ function PupForm({ obj }) {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} style={{ marginTop: '100px' }}>
       <h2 className="text-grey mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Pup</h2>
 
       {/* Name INPUT  */}

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Head from 'next/head';
 import { getTeams } from '../api/teamData';
 import TeamCard from '../components/TeamCard';
 import { useAuth } from '../utils/context/authContext';
@@ -17,9 +18,13 @@ export default function ShowTeams() {
   }, []);
 
   return (
-    <div className="d-flex flex-wrap">{teams.map((team) => (
-      <TeamCard key={team.firebaseKey} teamObj={team} onUpdate={getAllTeams} />
-    ))}
+    <div className="d-flex flex-wrap" style={{ marginTop: '100px' }}>
+      <Head>
+        <title>Meet the Teams</title>
+      </Head>
+      {teams.map((team) => (
+        <TeamCard key={team.firebaseKey} teamObj={team} onUpdate={getAllTeams} />
+      ))}
     </div>
   );
 }

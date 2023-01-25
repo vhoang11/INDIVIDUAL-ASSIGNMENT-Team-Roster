@@ -26,7 +26,7 @@ export default function NavBar() {
             <Link passHref href="/teams">
               <Nav.Link>Teams</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>Sign Out</Button>
+            <Button variant="danger" onClick={signOut} style={{ backgroundColor: '#023e8a' }}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
       </Container>

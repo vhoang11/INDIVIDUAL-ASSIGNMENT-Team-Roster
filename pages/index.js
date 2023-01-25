@@ -1,21 +1,16 @@
-import { useAuth } from '../utils/context/authContext';
+import Head from 'next/head';
+// import { useAuth } from '../utils/context/authContext';
+import React from 'react';
+// import '../styles/globals.css';
+import YoutubeEmbed from '../components/YoutubeEmbed';
 
-function Home() {
-  const { user } = useAuth();
-
+export default function App() {
   return (
-    <div
-      className="text-center d-flex flex-column justify-content-center align-content-center"
-      style={{
-        height: '90vh',
-        padding: '30px',
-        maxWidth: '400px',
-        margin: '0 auto',
-      }}
-    >
-      <h1>Hello {user.displayName}! </h1>
+    <div className="App" style={{ marginTop: '150px' }}>
+      <Head>
+        <title>Meet the Pups</title>
+      </Head>
+      <YoutubeEmbed embedId="fzZZJ3e9qDY" />
     </div>
   );
 }
-
-export default Home;
