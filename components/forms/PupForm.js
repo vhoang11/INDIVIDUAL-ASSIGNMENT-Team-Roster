@@ -50,7 +50,7 @@ function PupForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Pup</h2>
+      <h2 className="text-grey mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Pup</h2>
 
       {/* Name INPUT  */}
       <FloatingLabel controlId="floatingInput1" label="Pup Name" className="mb-3">
@@ -114,7 +114,7 @@ function PupForm({ obj }) {
 
       {/* A WAY TO HANDLE UPDATES FOR TOGGLES, RADIOS, ETC  */}
       <Form.Check
-        className="text-white mb-3"
+        className="text-grey mb-3"
         type="switch"
         id="adoptable"
         name="adoptable"
