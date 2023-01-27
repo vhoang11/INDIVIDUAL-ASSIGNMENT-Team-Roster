@@ -15,7 +15,7 @@ function PupCard({ pupObj, onUpdate }) {
   };
 
   return (
-    <Card style={{ width: '18rem', margin: '10px' }}>
+    <Card style={{ width: '18rem', height: '30rem', margin: '10px' }}>
       <Card.Img variant="top" src={pupObj.image} alt={pupObj.name} style={{ height: '400px' }} />
       <Card.Body>
         <Card.Title>{pupObj.name}</Card.Title>

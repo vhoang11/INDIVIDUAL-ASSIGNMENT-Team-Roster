@@ -25,14 +25,8 @@ const createTeam = (teamObj) => new Promise((resolve, reject) => {
 });
 
 const getSingleTeam = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/teams/${firebaseKey}.json`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
+  axios.get(`${dbUrl}/teams/${firebaseKey}.json`)
+    .then((response) => resolve(response.data))
     .catch(reject);
 });
 
@@ -43,13 +37,13 @@ const deleteSingleTeam = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const updateTeam = (teamObj) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/Teams/${teamObj.firebaseKey}.json`, teamObj)
+  axios.patch(`${dbUrl}/teams/${teamObj.firebaseKey}.json`, teamObj)
     .then(resolve)
     .catch(reject);
 });
 
 const getTeamPups = (teamFirebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/pups.json?orderBy="Team_id"&equalTo="${teamFirebaseKey}"`, {
+  fetch(`${dbUrl}/pups.json?orderBy="team_id"&equalTo="${teamFirebaseKey}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
