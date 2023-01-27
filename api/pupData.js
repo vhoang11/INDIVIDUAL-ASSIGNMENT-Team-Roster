@@ -38,14 +38,7 @@ const createPup = (pupObj) => new Promise((resolve, reject) => {
 });
 
 const updatePup = (pupObj) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/pups/${pupObj.firebaseKey}.json`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(pupObj),
-  })
-    .then((response) => response.json())
+  axios.patch(`${dbUrl}/pups/${pupObj.firebaseKey}.json`, pupObj)
     .then(resolve)
     .catch(reject);
 });

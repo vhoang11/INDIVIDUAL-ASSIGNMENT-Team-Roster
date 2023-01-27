@@ -12,6 +12,7 @@ const initialState = {
   name: '',
   image: '',
   description: '',
+  team: '',
   adoptable: false,
 };
 
@@ -39,20 +40,20 @@ function PupForm({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updatePup(pupInput)
-        .then(() => router.push(`/pups/${obj.firebaseKey}`));
+        .then(() => router.push('/players'));
     } else {
       const payload = { ...pupInput, uid: user.uid };
       createPup(payload).then(() => {
-        router.push('/pups');
+        router.push('/players');
       });
     }
   };
 
   return (
     <Form onSubmit={handleSubmit} style={{ marginTop: '100px' }}>
-      <h2 className="text-grey mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Pup</h2>
+      <h2 className="text-white mt-5">{obj.firebaseKey ? 'Update' : 'Create'} Pup</h2>
 
-      {/* Name INPUT  */}
+      {/* NAME INPUT  */}
       <FloatingLabel controlId="floatingInput1" label="Pup Name" className="mb-3">
         <Form.Control
           type="text"
@@ -88,6 +89,17 @@ function PupForm({ obj }) {
         />
       </FloatingLabel>
 
+      {/* TEAM NAME INPUT  */}
+      <FloatingLabel controlId="floatingInput3" label="Team Name" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="Enter team"
+          name="team"
+          value={pupInput.team}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
       {/* TEAM SELECT  */}
       <FloatingLabel controlId="floatingSelect" label="Team">
         <Form.Select

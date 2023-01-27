@@ -16,16 +16,16 @@ export default function ViewPup() {
     viewPupDetails(firebaseKey).then(setPupDetails);
   }, [firebaseKey]);
   //   getSinglePup(firebaseKey).then(setPupDetails);
-  // });
+  // }, [firebaseKey]);
 
   return (
     <div className="mt-5 d-flex flex-wrap">
       <div className="d-flex flex-column">
-        <img src={pupDetails.image} alt={pupDetails.name} style={{ width: '300px' }} />
+        <img src={pupDetails.image} alt={pupDetails.name} style={{ width: '100px' }} />
       </div>
       <div className="text-grey ms-5 details">
         <h5>
-          {pupDetails.name} on {pupDetails.teamObject?.team_name}
+          {pupDetails.name} on {pupDetails.teamObject?.team}
           {pupDetails.teamObject?.favorite ? ' 🤍' : ''}
         </h5>
         <p>{pupDetails.description || ''}</p>
