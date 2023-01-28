@@ -18,7 +18,7 @@ export default function ShowTeams() {
   }, []);
 
   return (
-    <div className="d-flex flex-wrap" style={{ marginTop: '100px' }}>
+    <div className="d-flex flex-wrap text-center my-4" style={{ marginTop: '100px' }}>
       <Head>
         <title>Meet the Teams</title>
       </Head>

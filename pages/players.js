@@ -19,7 +19,7 @@ function Team() {
   }, []);
 
   return (
-    <div className="text-center my-4">
+    <div className="text-center my-4" style={{ alignItems: 'center' }}>
       <Head>
         <title>Meet the Pups</title>
       </Head>
