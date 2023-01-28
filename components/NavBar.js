@@ -6,7 +6,6 @@ import {
 } from 'react-bootstrap';
 // import SearchBar from './SearchBar';
 import { signOut } from '../utils/auth';
-import SearchBar from './SearchBar';
 
 export default function NavBar() {
   return (
@@ -31,8 +30,8 @@ export default function NavBar() {
             <Link passHref href="/team/new">
               <Nav.Link>Add Team</Nav.Link>
             </Link>
-            <SearchBar />
-            {/* <input placeholder="Search" /> */}
+            {/* <SearchBar /> */}
+            <input placeholder="Search" />
             <Button variant="danger" onClick={signOut} style={{ backgroundColor: '#023e8a', marginLeft: '10px' }}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
