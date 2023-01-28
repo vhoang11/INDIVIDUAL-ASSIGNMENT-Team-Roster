@@ -21,11 +21,11 @@ export default function ViewTeam() {
 
   return (
     <div>
-      <div className="mt-5 d-flex flex-wrap">
+      <div className="mt-5 d-flex flex-wrap" style={{ marginTop: '100px' }}>
         <div className="d-flex flex-column">
           <img src={teamDetails.image} alt={teamDetails.team_name} style={{ width: '300px' }} />
         </div>
-        <div className="text-grey ms-5 details">
+        <div className="text-white ms-5 details">
           <h5>
             {teamDetails.team_name}
             {teamDetails.favorite ? ' 🤍' : ''}
@@ -34,7 +34,7 @@ export default function ViewTeam() {
           <hr />
         </div>
       </div>
-      <div className="d-flex flex-wrap">
+      <div className="d-flex flex-wrap text-center" style={{ marginTop: '50px' }}>
         {teamDetails.pups?.map((pup) => (
           <PupCard key={pup.firebaseKey} pupObj={pup} onUpdate={getAllTeamPups} />
         ))};

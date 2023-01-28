@@ -15,26 +15,20 @@ export default function ViewPup() {
   useEffect(() => {
     viewPupDetails(firebaseKey).then(setPupDetails);
   }, [firebaseKey]);
-  //   getSinglePup(firebaseKey).then(setPupDetails);
+  // getSinglePup(firebaseKey).then(setPupDetails);
   // }, [firebaseKey]);
 
   return (
     <div className="mt-5 d-flex flex-wrap">
-      <div className="d-flex flex-column">
-        <img src={pupDetails.image} alt={pupDetails.name} style={{ width: '100px' }} />
+      <div className="d-flex flex-column" style={{ width: '30rem' }}>
+        <img src={pupDetails.image} alt={pupDetails.name} />
       </div>
-      <div className="text-grey ms-5 details">
+      <div className="text-white ms-5 details">
         <h5>
-          {pupDetails.name} on {pupDetails.teamObject?.team}
-          {pupDetails.teamObject?.favorite ? ' 🤍' : ''}
+          {pupDetails.name} on {pupDetails.teamObject?.team_name}
+          {pupDetails.adoptable ? ' 🤍' : ''}
         </h5>
         <p>{pupDetails.description || ''}</p>
-        <hr />
-        <p>
-          {pupDetails.adoptable
-            ? `🏷️ Adoptable $${pupDetails.price}`
-            : `${pupDetails.price}`}
-        </p>
       </div>
     </div>
   );
