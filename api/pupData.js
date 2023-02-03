@@ -4,7 +4,7 @@ import { clientCredentials } from '../utils/client';
 const endpoint = clientCredentials.databaseURL;
 
 const getPups = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/pupss.json?orderBy="uid"&equalTo="${uid}"`, {
+  fetch(`${endpoint}/pups.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ const getSinglePup = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 const createPup = (pupObj) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/pups/.json`, {
+  fetch(`${endpoint}/pups.json`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

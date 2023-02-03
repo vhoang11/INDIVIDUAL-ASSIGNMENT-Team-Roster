@@ -40,13 +40,13 @@ function PupForm({ obj }) {
     e.preventDefault();
     if (obj.firebaseKey) {
       updatePup(pupInput)
-        .then(() => router.push('/players'));
+        .then(() => router.push(`/players/${obj.firebaseKey}`));
     } else {
       const payload = { ...pupInput, uid: user.uid };
       createPup(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updatePup(patchPayload).then(() => {
-          router.push('/');
+          router.push('/players');
         });
       });
     }

@@ -41,7 +41,7 @@ function TeamForm({ obj }) {
       createTeam(payload).then(({ name }) => {
         const patchPayload = { firebaseKey: name };
         updateTeam(patchPayload).then(() => {
-          router.push('/');
+          router.push('/teams');
         });
       });
     }
