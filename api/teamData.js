@@ -1,49 +1,77 @@
-import axios from 'axios';
 import { clientCredentials } from '../utils/client';
 
-const dbUrl = clientCredentials.databaseURL;
+const endpoint = clientCredentials.databaseURL;
 
 const getTeams = (uid) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/teams.json?orderBy="uid"&equalTo="${uid}"`)
-    .then((response) => {
-      if (response.data) {
-        resolve(Object.values(response.data));
+  fetch(`${endpoint}/teams.json?orderBy="uid"&equalTo="${uid}"`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      if (data) {
+        resolve(Object.values(data));
       } else {
         resolve([]);
       }
     })
-    .catch((error) => reject(error));
+    .catch(reject);
 });
 
 const createTeam = (teamObj) => new Promise((resolve, reject) => {
-  axios.post(`${dbUrl}/teams.json`, teamObj)
-    .then((response) => {
-      const payload = { firebaseKey: response.data.name };
-      axios.patch(`${dbUrl}/teams/${response.data.name}.json`, payload)
-        .then(resolve);
-    }).catch(reject);
+  fetch(`${endpoint}/teams/.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(teamObj),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
+    .catch(reject);
 });
 
 const getSingleTeam = (firebaseKey) => new Promise((resolve, reject) => {
-  axios.get(`${dbUrl}/teams/${firebaseKey}.json`)
-    .then((response) => resolve(response.data))
+  fetch(`${endpoint}/teams/${firebaseKey}.json`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
     .catch(reject);
 });
 
 const deleteSingleTeam = (firebaseKey) => new Promise((resolve, reject) => {
-  axios.delete(`${dbUrl}/teams/${firebaseKey}.json`)
-    .then(() => resolve('deleted'))
-    .catch((error) => reject(error));
+  fetch(`${endpoint}/teams/${firebaseKey}.json`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
+    .catch(reject);
 });
 
 const updateTeam = (teamObj) => new Promise((resolve, reject) => {
-  axios.patch(`${dbUrl}/teams/${teamObj.firebaseKey}.json`, teamObj)
-    .then(resolve)
+  fetch(`${endpoint}/teams/${teamObj.firebaseKey}.json`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(teamObj),
+  })
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
     .catch(reject);
 });
 
 const getTeamPups = (teamFirebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/pups.json?orderBy="team_id"&equalTo="${teamFirebaseKey}"`, {
+  fetch(`${endpoint}/pups.json?orderBy="team_id"&equalTo="${teamFirebaseKey}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -54,7 +82,7 @@ const getTeamPups = (teamFirebaseKey) => new Promise((resolve, reject) => {
 });
 
 const favoriteTeam = (uid) => new Promise((resolve, reject) => {
-  fetch(`${dbUrl}/teams.json?orderBy="uid"&equalTo="${uid}"`, {
+  fetch(`${endpoint}/teams.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

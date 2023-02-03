@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-// import Image from 'next/image';
 import { viewPupDetails } from '../../api/mergedData';
-// import { getSinglePup } from '../../api/pupData';
 
 export default function ViewPup() {
   const [pupDetails, setPupDetails] = useState({});
@@ -15,8 +13,6 @@ export default function ViewPup() {
   useEffect(() => {
     viewPupDetails(firebaseKey).then(setPupDetails);
   }, [firebaseKey]);
-  // getSinglePup(firebaseKey).then(setPupDetails);
-  // }, [firebaseKey]);
 
   return (
     <div className="mt-5 d-flex flex-wrap">

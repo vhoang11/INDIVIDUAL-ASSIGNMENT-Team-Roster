@@ -43,8 +43,11 @@ function PupForm({ obj }) {
         .then(() => router.push('/players'));
     } else {
       const payload = { ...pupInput, uid: user.uid };
-      createPup(payload).then(() => {
-        router.push('/players');
+      createPup(payload).then(({ name }) => {
+        const patchPayload = { firebaseKey: name };
+        updatePup(patchPayload).then(() => {
+          router.push('/');
+        });
       });
     }
   };
